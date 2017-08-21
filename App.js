@@ -24,17 +24,19 @@ export default class App extends React.Component {
       onPanResponderRelease: () => {}
     });
 
-    this.state = { panResponder, position };
+    this.state = { panResponder, position, scroll: true };
   }
 
   renderAnimatedText(text) {
     return (
-      <Animated.Text
-        style={[this.state.position.getLayout(), styles.text]}
-        {...this.state.panResponder.panHandlers}
-      >
-        {text}
-      </Animated.Text>
+      <View style={{ backgroundColor: 'transparent' }}>
+        <Animated.Text
+          style={[this.state.position.getLayout(), styles.text]}
+          {...this.state.panResponder.panHandlers}
+        >
+          {text}
+        </Animated.Text>
+      </View>
     );
   }
 
@@ -42,7 +44,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.swiperContainer}>
-          <Swiper style={styles.wrapper}>
+          <Swiper>
             <View style={styles.slide3}>
               <Text style={styles.text}>Hello Stephen</Text>
             </View>
@@ -56,7 +58,7 @@ export default class App extends React.Component {
         </View>
 
         <View style={styles.swiperContainer}>
-          <Swiper style={styles.wrapper}>
+          <Swiper style={{ overflow: 'visible' }}>
             <View style={styles.slide1}>
               {this.renderAnimatedText('You are The Best')}
             </View>
@@ -83,8 +85,6 @@ const styles = StyleSheet.create({
   swiperContainer: {
     height: 250,
     width: SCREEN_WIDTH
-  },
-  wrapper: {
   },
   slide1: {
     flex: 1,
